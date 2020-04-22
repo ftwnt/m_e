@@ -1,13 +1,16 @@
 class GetPairs
   class << self
     def call(arr, sum)
-      passed = {}
+      res = []
 
-      arr.each_with_object([]) do |el, result|
+      until arr.empty?
+        el = arr.shift
         diff = sum - el
-        result << [diff, el] if passed[diff]
-        passed[el] = true
+        diff_el_idx = arr.index(diff)
+        res << [el, arr.delete_at(diff_el_idx)] if diff_el_idx
       end
+
+      res
     end
   end
 end
